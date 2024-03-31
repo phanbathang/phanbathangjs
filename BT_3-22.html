@@ -1,0 +1,147 @@
+////////Change font Element
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function ChangeStyle() {
+            document.getElementById('p1').style.color="blue";
+            document.getElementById('p1').style.fontFamily="Arial";
+        }
+    </script>
+</head>
+<body>
+    <p id="p1">Hello world!</p>
+    <input type="button" onclick="ChangeStyle()" value="Change style"/>
+</body>
+</html>
+
+////////Change HTML Events
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button"
+    onclick="document.body.bgColor= 'lavender';"
+    value="Change background color"
+    />
+</body>
+</html>
+
+////////Create HTML Element
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        .dynamicDiv {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #c0c0c0;
+            background-color: #d72424;
+            font-size: 11px;
+            font-family: verdana;
+            color: #000;
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+       function createDiv() {
+        var divTag = document.createElement("div");
+        divTag.id = "div1";
+        divTag.setAttribute("align","center");
+        divTag.style.margin = "0px auto";
+        divTag.className = "dynamicDiv";
+        divTag.innerHTML = "This HTML Div tag created using Javascript DOM dynamically";
+        document.body.appendChild(divTag);
+       }
+    </script>
+</head>
+<body>
+    <p align="center">
+        <b>CLick this button to create div element dynamically:</b>
+        <input type="button" id="btn1" value="create div" onclick="createDiv();"/>
+    </p>
+</body>
+</html>
+
+////////DOM loaded
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function domLoaded() {
+            console.log('Domn is loaded');
+            var div1 = document.getElementById('container1');
+            div1.innerHTML += '<p>paragraph3 the URL is ' + document.URL + '</p>';
+            var title = window.document.getElementById('title');
+            title.innerText += 'Cool!';
+            var divs = document.body.getElementsByTagName('div');
+            for(var i in divs) {
+                divs[i].innerHTML += '<p>Another paragraph</p>';
+            }
+        }
+    </script>
+</head>
+<body onload="domLoaded();">
+    <div id="container1">
+        <h1>heading1</h1>
+        <p>paragraph1</p>
+        <p>paragraph2</p>
+    </div>
+    <div id="container1">
+        <h1>heading2</h1>
+        <p>paragraph1</p>
+    </div>
+</body>
+</html>
+
+////////onSubmit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function evaluateForm() {
+            var input = document.getElementById('info');
+            var result = document.getElementById('result-form');
+            if(input.value == 42) {
+                result.innerHTML= 'Correct Answer';
+            } else {
+                result.innerHTML= 'Wrong Answer';
+            }
+        }
+        function evaluateClick() {
+            evaluateForm();
+            var result = document.getElementById('result-form');
+            result.innerHTML='You submitted the: '+ result.innerHTML;
+        }
+        function hint() {
+            var input = document.getElementById('info');
+            input.value='Guess what the magic number is....';
+        }
+    </script>
+</head>
+<body>
+    <div id="input-form">
+        <label for="info">Enter information here: </label>
+        <input type="text" name="info" id="info" onkeyup="evaluateForm();"/>
+        <button onclick="evaluateClick()">Submit</button>
+        <button onclick="hint();">Hint</button>
+    </div>
+    <div id="result-form"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <button id="load-data">Load Data</button>
+        <div id="products"></div>
+    </div>
+
+    <script>
+    const productsElement = document.getElementById('products');
+    const loadDataButton = document.getElementById('load-data');
+
+    loadDataButton.addEventListener('click', () => {
+    $.ajax({
+        url: 'https://dummyjson.com/products',
+        method: 'GET',
+        success: function(data) {
+        const products = data.products;
+        
+        productsElement.innerHTML = products.map(product => {
+            const images = product.images.map(image => `<img src="${image}">`).join('');
+            
+            return `
+            <div class="product">
+                <h2>${product.title}</h2>
+                <p>${product.description}</p>
+                <p>${product.discountPercentage}</p>
+                <p>${product.rating}</p>
+                <p>${product.stock}</p>
+                <p>${product.category}</p>
+                <p>Giá gốc: ${product.price}</p>
+                <p>Thương hiệu: ${product.brand}</p>
+                ${images}
+            </div>
+            `;
+        }).join('');
+        }
+    });
+    });
+
+    </script>
+</body>
+</html>
