@@ -1,0 +1,131 @@
+////////VD1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        document.body.style.background= '#463030'
+    </script>
+</body>
+</html>
+
+////////VD2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="text" value="Hallo1" id="e1">
+    <input type="text" name="text" value="Hallo2" id="e2">
+    <input type="text" name="text" value="Hallo3" id="e3">
+
+    <script type="text/javascript">
+        var inputs = document.getElementsByName("text");
+        for(var i = 0; i < inputs.length; i++)
+        inputs[i].value = "Olla" + 1;
+
+        document.getElementById("e1").value = "toll!";
+        document.getElementById("e1").style.color = "red";
+    </script>
+</body>
+</html>
+
+////////VD3
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="h1">Hello World</h1>
+    <script type="text/javascript">
+        document.getElementById("h1").innerHTML = "New text!";
+    </script>
+</body>
+</html>
+
+////////VD4
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        table {
+          border-collapse: collapse;
+        }
+      
+        th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: left;
+        }
+      
+        th {
+          background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>SP</th>
+                <th>MaSP</th>
+                <th>Tên</th>
+                <th>SL</th>
+                <th>Them</th>
+                <th>Xoa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>001</td>
+                <td>Bánh</td>
+                <td>1</td>
+                <td><button onclick="addRow()">+</button></td>
+                <td><button onclick="deleteRow()">-</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let count = 2;
+      
+        function addRow() {
+          const table = document.getElementById('myTable');
+          const newRow = document.createElement('tr');
+
+          newRow.innerHTML = `
+            <td>${count}</td>
+            <td>001</td>
+            <td>Bánh</td>
+            <td>1</td>
+            <td><button onclick="addRow()">+</button></td>
+            <td><button onclick="deleteRow(this)">-</button></td>
+          `;
+          
+          table.querySelector('tbody').appendChild(newRow);
+          
+          count++;
+        }
+        
+        function deleteRow(e) {
+          const row = e.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+        }
+      </script>
+</body>
+</html>
