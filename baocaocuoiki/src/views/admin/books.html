@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sách</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0px 0px 3px #333333;
+            z-index: 1;
+        }
+
+        .header_icon {
+            display: flex;
+            align-items: center;
+            margin-left: 15%;
+        }
+
+        .header_list {
+            display: flex;
+            align-items: center;
+            margin-left: 38%;
+        }
+
+        .header_list a {
+            padding-right: 50px;
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+        }
+
+        .navbar {
+            padding-top: 100px;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding-bottom: 20px;
+        }
+
+        .container {
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        .product {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 40%;
+        }
+
+        .product img {
+            width: 180px;
+            height: 170px;
+            margin-right: 20px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-info div {
+            margin-bottom: 5px;
+        }
+
+        .product-info .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .product-info .available {
+            color: red;
+        }
+
+        .btn {
+            background-color: #006241;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: max-content;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-evenly;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding: 50px 0;
+            color: #fff;
+        }
+
+        .footer_item-header {
+            font-size: 22px;
+            font-weight: 600;
+            padding-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+        <div class="header_list">
+            <a href="http://localhost:3000/api/product/index" class="header_list-home">Giới Thiệu</a>
+            <a href="http://localhost:3000/api/product/books" class="header_list-book">Sách</a>
+            <a href="http://localhost:3000/api/product/news" class="header_list-new">Tin Tức - Sự Kiện</a>
+            <a href="http://localhost:3000/api/product/support" class="header_list-support">Hỗ Trợ</a>
+            <div id="header_list-name"></div>
+        </div>
+    </div>
+    <div class="navbar">
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5%;" href="" class="navbar_home">Trang chủ > </a>
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5px;" href="" class="navbar_new">Sách</a>
+    </div>
+    <div id="container" class="container"></div>
+    <div class="footer">
+        <div class="footer_item">
+            <div class="footer_item-header">TRUY CẬP NHANH</div>
+            <a style="color: #fff; text-decoration: none;" href="" class="footer_item-body">Bộ phận hỗ trợ</a>
+        </div>
+        <div class="footer_item">
+            <div class="footer_item-header">DANH MỤC</div> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Giới Thiệu</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Sách</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Tin Tức - Sự Kiện</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Hỗ Trợ</a> 
+        </div>
+        <div class="footer_item">
+            <div style="padding-bottom: 20px;" class="footer_item-header">LIÊN HỆ VỚI CHÚNG TÔI</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Địa chỉ : TTTM LePARC, P. Yên Sở, Q. Hoàng Mai, Hà Nội </div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Email: cskh@quangich.com</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Website: thuvien.edu.vn</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Hotline: 1900 4740</div>
+        </div>
+    </div>
+
+    <script>
+        fetch('http://localhost:3001/api/product') // Change this URL to the appropriate endpoint
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('container');
+            const products = data.datas;
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+
+                const img = document.createElement('img');
+                img.src = product.img;
+                productDiv.appendChild(img);
+
+                const productInfo = document.createElement('div');
+                productInfo.classList.add('product-info');
+
+                const title = document.createElement('div');
+                title.textContent = product.title;
+                title.classList.add('title');
+                productInfo.appendChild(title);
+
+                const author = document.createElement('div');
+                author.textContent = 'Tác giả: ' + product.author;
+                productInfo.appendChild(author);
+
+                const publisher = document.createElement('div');
+                publisher.textContent = 'Nhà xuất bản: ' + product.publisher;
+                productInfo.appendChild(publisher);
+
+                const year = document.createElement('div');
+                year.textContent = 'Năm xuất bản: ' + product.publicationYear;
+                productInfo.appendChild(year);
+
+                const genre = document.createElement('div');
+                genre.textContent = 'Loại ấn phẩm: ' + product.genre;
+                productInfo.appendChild(genre);
+
+                const btn = document.createElement('button');
+                btn.textContent = 'Mượn sách ngay';
+                btn.classList.add('btn');
+                productInfo.appendChild(btn);
+
+                productDiv.appendChild(productInfo);
+                container.appendChild(productDiv);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+    </script>
+</body>
+</html>

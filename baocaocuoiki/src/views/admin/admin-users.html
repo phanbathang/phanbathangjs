@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0px 0px 3px #333333;
+            z-index: 1;
+        }
+
+        .header_icon {
+            display: flex;
+            align-items: center;
+            margin-left: 5%;
+        }
+
+        .header_list {
+            display: flex;
+            align-items: center;
+            margin-left: 38%;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0.6;
+        }
+
+        .container {
+            width: 100%;
+            padding-top: 82px;
+            display: flex;
+        }
+
+        .container_navbar {
+            width: 16%;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+        }
+
+        .container_navbar-text {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 40px 20px;
+            box-shadow: 0px 0px 3px #333333;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+        }
+
+        .container_navbar-text2 {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 40px 20px;
+            box-shadow: 0px 0px 3px #333333;
+            background-color: #797979;
+        }
+
+        .container_navbar-text:hover {
+            opacity: 0.6;
+        }
+
+        .container_content {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #53a476;
+        }
+        td img {
+            width: 140px;
+            height: auto;
+        }
+        .action-buttons a {
+            margin-right: 5px;
+            text-decoration: none;
+        }
+
+        .action-buttons-update {
+            color: #000;
+            border-right: 1px solid #000;
+            padding-right: 12px;
+        }
+
+        .action-buttons-remove {
+            color: #000;
+        }
+
+        .container_content-add {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding: 15px 30px;
+            border-radius: 16px;
+            position: absolute;
+            margin-top: 20px;
+            width: 7%;
+            top: 0%;
+            z-index: 1;
+            right: 0%;
+            position: fixed;
+        }
+
+        
+        .container_content-out {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding: 15px 30px;
+            border-radius: 16px;
+            position: absolute;
+            margin-top: 20px;
+            width: 9%;
+            top: 0%;
+            z-index: 1;
+            right: 22%;
+            position: fixed;
+        }
+        
+        #container_add {
+            display: none;
+            position: absolute;
+            margin-left: 27%;
+            background-color: #fff;
+            width: 50%;
+        }
+
+        .container_add-header {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .form {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0px 0px 3px #333333;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #53a476;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 425px;
+        }
+
+        button:hover {
+            background-color: #459266;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">ADMIN</div>
+        </div>
+        <div class="container">
+            <div class="container_navbar">
+                <a href="http://localhost:3001/api/product/admin" class="container_navbar-text">Quản lý sách</a>
+                <a href="http://localhost:3001/api/product/admin-users" class="container_navbar-text2">Quản lý Người dùng</a>
+                <a href="" class="container_navbar-text">Quản lý thời gian mượn</a>
+            </div>
+            <div class="container_content">
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Users</th>
+                            <th>UserName</th>
+                            <th>Phone</th>
+                            <th>Address</th>
+                            <th>Email</th>
+                            <th>PassWord</th>
+                            <th>Role</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                        <!-- Nội dung sản phẩm sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+
+                <button class="container_content-add" onclick="showForm(event)">Thêm</button>
+                <button class="container_content-out" onclick="outAcc(event)">Đăng xuất</button>
+
+            </div>
+            <div id="container_add">
+                <div class="container_add-header">Thêm Người Dùng</div>
+                <div class="form">
+                    <form id="addBookForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="UserName">UserName</label>
+                        <input type="text" id="userName" name="userName" placeholder="UserName" required>
+                        
+                        <label for="Phone">Phone</label>
+                        <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                        
+                        <label for="Address">Address</label>
+                        <input type="text" id="address" name="address" placeholder="Address" required>
+                        
+                        <label for="Email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email" required>                        
+                        
+                        <label for="genre">PassWord</label>
+                        <input type="text" id="password" name="password" placeholder="PassWord" required>
+                        
+                        <label for="genre">ConfirmPassWord</label>
+                        <input type="text" id="confirmPassword" name="confirmPassword" placeholder="ConfirmPassWord" required>
+                        
+                        <label for="genre">Role</label>
+                        <select style="margin: 10px 0; padding: 10px; font-size: 16px; width: 106%;" id="role" name="role" required>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+
+                        <button type="button" onclick="addUser()">Thêm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function outAcc(event) {
+            if (confirm('Bạn có muốn đăng xuất không?')) {
+                window.location.href = "http://localhost:3001/api/product/login";
+            }
+        }
+        function showForm(event) {
+            document.getElementById('container_add').style.display = 'block';
+            event.stopPropagation(); // Ngăn chặn sự kiện click từ lan tỏa đến document
+        }
+    
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('container_add');
+            var target = event.target;
+            if (container.style.display === 'block' && !container.contains(target)) {
+                container.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+
+////////// Lay danh sach nguoi dung
+        fetch('http://localhost:3001/api/auth/getUser')
+        .then(response => response.json()) // Chuyển dữ liệu nhận được thành JSON
+        .then(data => {
+            const contentElement = document.getElementById('content'); // Lấy phần tử có id là "content"
+            const datas = data.datas; // Lấy danh sách sản phẩm từ dữ liệu
+
+            datas.forEach(user => { // Duyệt qua từng sản phẩm trong danh sách
+                const trElement = document.createElement('tr'); // Tạo thẻ tr (hàng mới)
+
+                // Tạo và thêm các ô vào hàng
+                const userId = document.createElement('td');
+                userId.textContent = user._id;
+                trElement.appendChild(userId);
+
+                const userName = document.createElement('td');
+                userName.textContent = user.userName;
+                trElement.appendChild(userName);
+
+                const userPhone = document.createElement('td');
+                userPhone.textContent = user.phone;
+                trElement.appendChild(userPhone);
+
+                const userAddress = document.createElement('td');
+                userAddress.textContent = user.address;
+                trElement.appendChild(userAddress);
+
+                const userEmail = document.createElement('td');
+                userEmail.textContent = user.email;
+                trElement.appendChild(userEmail);
+                
+                const userPass = document.createElement('td');
+                userPass.textContent = user.password;
+                trElement.appendChild(userPass);
+
+                const userRole = document.createElement('td');
+                userRole.textContent = user.role;
+                trElement.appendChild(userRole);
+
+                const actionCell = document.createElement('td');
+
+                const removeLink = document.createElement('a');
+                removeLink.href = '#';
+                removeLink.className = 'action-buttons-remove';
+                removeLink.textContent = 'Xóa';
+                removeLink.style.textDecoration = 'none'; // Thêm CSS này
+                removeLink.style.marginLeft = '10px'; // Thêm CSS này
+                removeLink.onclick = (event) => {
+                    event.preventDefault();
+                    confirmDelete(user._id);
+                };
+                actionCell.appendChild(removeLink);
+
+                trElement.appendChild(actionCell);
+
+                contentElement.appendChild(trElement); // Thêm hàng vào phần tử "content"
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+/////////// Xoa nguoi dung
+        function confirmDelete(userId) {
+            const confirmed = confirm('Bạn có chắc chắn muốn xóa người dùng này không?');
+            if (confirmed) {
+                deleteUser(userId);
+                location.reload();
+
+            }
+        }
+
+        function deleteUser(userId) {
+            fetch(`http://localhost:3001/api/auth/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error('Error:', error));
+        }
+
+////////// Them nguoi dung
+        function addUser() {
+            // Lấy giá trị từ form
+            const userName = document.getElementsByName('userName')[0].value;
+            const phone = document.getElementsByName('phone')[0].value;
+            const address = document.getElementsByName('address')[0].value;
+            const email = document.getElementsByName('email')[0].value;
+            const password = document.getElementsByName('password')[0].value;
+            const confirmPassword = document.getElementsByName('confirmPassword')[0].value;
+            const role = document.querySelector('select[name="role"]').value;
+        
+            // Kiểm tra mật khẩu đã được xác nhận chưa
+            if (password !== confirmPassword) {
+                alert("Password và Confirm Password không khớp nhau.");
+                return;
+            }
+        
+            // Tạo đối tượng chứa dữ liệu đăng ký
+            const registerData = {
+                userName: userName,
+                phone: phone,
+                address: address,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                role: role
+            };
+        
+            // Gửi yêu cầu POST đến đường dẫn /api/register trên máy chủ
+            fetch('http://localhost:3001/api/auth/addUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra xem phản hồi có trường "message" không
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    // Nếu không có trường "message", xem xét rằng đăng ký đã thành công
+                    alert(data.message);
+                    console.log(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

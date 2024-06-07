@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            height: 80px;
+            width: 100%;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0px 0px 3px #333333;
+            z-index: 1;
+        }
+
+        .header_icon {
+            display: flex;
+            align-items: center;
+            margin-left: 5%;
+        }
+
+        .header_list {
+            display: flex;
+            align-items: center;
+            margin-left: 38%;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0.6;
+        }
+
+        .container {
+            width: 100%;
+            padding-top: 82px;
+            display: flex;
+        }
+
+        .container_navbar {
+            width: 16%;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+        }
+
+        .container_navbar-text1 {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 40px 20px;
+            box-shadow: 0px 0px 3px #333333;
+            background-color: #797979;
+        }
+
+        .container_navbar-text {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            padding: 40px 20px;
+            box-shadow: 0px 0px 3px #333333;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+        }
+
+        .container_navbar-text:hover {
+            opacity: 0.6;
+        }
+
+        .container_content {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #53a476;
+        }
+        td img {
+            width: 140px;
+            height: auto;
+        }
+        .action-buttons a {
+            margin-right: 5px;
+            text-decoration: none;
+        }
+
+        .action-buttons-update {
+            color: #000;
+            border-right: 1px solid #000;
+            padding-right: 12px;
+        }
+
+        .action-buttons-remove {
+            color: #000;
+        }
+
+        .container_content-add {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding: 15px 30px;
+            border-radius: 16px;
+            position: absolute;
+            margin-top: 20px;
+            width: 7%;
+            top: 0%;
+            z-index: 1;
+            right: 0%;
+            position: fixed;
+        }
+
+        .container_content-out {
+            text-decoration: none;
+            color: #fff;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            padding: 15px 30px;
+            border-radius: 16px;
+            position: absolute;
+            margin-top: 20px;
+            width: 9%;
+            top: 0%;
+            z-index: 1;
+            right: 22%;
+            position: fixed;
+        }
+        
+        #container_add {
+            display: none;
+            position: absolute;
+            margin-left: 27%;
+            background-color: #fff;
+            width: 50%;
+        }
+
+        .container_add-header {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            text-align: center;
+            color: #fff;
+        }
+
+        #container_update {
+            display: none;
+            position: absolute;
+            margin-left: 27%;
+            background-color: #fff;
+            width: 50%;
+        }
+
+        .container_update-header {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .form {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0px 0px 3px #333333;
+
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #53a476;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 425px;
+        }
+
+        button:hover {
+            background-color: #459266;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">ADMIN</div>
+        </div>
+        <div class="container">
+            <div class="container_navbar">
+                <a href="http://localhost:3001/api/product/admin" class="container_navbar-text1">Quản lý sách</a>
+                <a href="http://localhost:3001/api/product/admin-users" class="container_navbar-text">Quản lý Người dùng</a>
+                <a href="" class="container_navbar-text">Quản lý thời gian mượn</a>
+            </div>
+            <div class="container_content">
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Sách</th>
+                            <th>Tiêu Đề</th>
+                            <th>Ảnh</th>
+                            <th>Tác Giả</th>
+                            <th>Nhà Xuất Bản</th>
+                            <th>Năm Xuất Bản</th>
+                            <th>Thể Loại</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                        <!-- Nội dung sản phẩm sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+
+                <button class="container_content-add" onclick="showForm(event)">Thêm</button>
+                <!-- <button class="container_content-add" onclick="updateForm(event)">Sửa</button> -->
+                <button class="container_content-out" onclick="outAcc(event)">Đăng xuất</button>
+
+            </div>
+            <!------------------------- Form thêm sản phẩm -------------------------------------->
+            <div id="container_add">
+                <div class="container_add-header">Thêm Sản Phẩm</div>
+                <div class="form">
+                    <form id="addBookForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="title">Tiêu Đề</label>
+                        <input type="text" id="title" name="title" placeholder="Tiêu Đề" required>
+
+                        <label for="img">Ảnh</label>
+                        <input type="text" id="img" name="img" placeholder="Link ảnh" required>
+                        
+                        <label for="author">Tác Giả</label>
+                        <input type="text" id="author" name="author" placeholder="Tác Giả" required>
+                        
+                        <label for="publisher">Nhà Xuất Bản</label>
+                        <input type="text" id="publisher" name="publisher" placeholder="Nhà Xuất Bản" required>
+                        
+                        <label for="year">Năm Xuất Bản</label>
+                        <input type="number" id="publicationYear" name="publicationYear" placeholder="Năm Xuất Bản" required>
+                        
+                        <label for="genre">Thể Loại</label>
+                        <input type="text" id="genre" name="genre" placeholder="Thể Loại" required>
+                        
+                        <button type="button" onclick="addProduct()">Thêm</button>
+                    </form> 
+                </div>
+            </div>
+
+            <!------------------------- Form sửa sản phẩm -------------------------------------->
+            <div id="container_update">
+                <div class="container_update-header">Sửa Sản Phẩm</div>
+                <div class="form">
+                    <form id="updateBookForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="title">Tiêu Đề</label>
+                        <input type="text" id="updateTitle" name="title" placeholder="Tiêu Đề" required>
+
+                        <label for="img">Ảnh</label>
+                        <input type="text" id="img" name="img" placeholder="Link ảnh" required>
+                        
+                        <label for="author">Tác Giả</label>
+                        <input type="text" id="updateAuthor" name="author" placeholder="Tác Giả" required>
+                        
+                        <label for="publisher">Nhà Xuất Bản</label>
+                        <input type="text" id="updatePublisher" name="publisher" placeholder="Nhà Xuất Bản" required>
+                        
+                        <label for="year">Năm Xuất Bản</label>
+                        <input type="number" id="updatePublicationYear" name="publicationYear" placeholder="Năm Xuất Bản" required>
+                        
+                        <label for="genre">Thể Loại</label>
+                        <input type="text" id="updateGenre" name="genre" placeholder="Thể Loại" required>
+                        
+                        <button type="button" id="updateButton" onclick="updateProduct()">Sửa</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function outAcc(event) {
+            if (confirm('Bạn có muốn đăng xuất không?')) {
+                window.location.href = "http://localhost:3001/api/product/login";
+            }
+        }
+
+        function showForm(event) {
+            document.getElementById('container_add').style.display = 'block';
+            event.stopPropagation(); // Ngăn chặn sự kiện click từ lan tỏa đến document
+        }
+        
+    
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('container_add');
+            var target = event.target;
+            if (container.style.display === 'block' && !container.contains(target)) {
+                container.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+///////// Hiển thị thông tin sách
+        fetch('http://localhost:3001/api/product') // Đổi URL này nếu cần
+        .then(response => response.json()) // Chuyển dữ liệu nhận được thành JSON
+        .then(data => {
+            const contentElement = document.getElementById('content'); // Lấy phần tử có id là "content"
+            const datas = data.datas; // Lấy danh sách sản phẩm từ dữ liệu
+
+            datas.forEach(product => { // Duyệt qua từng sản phẩm trong danh sách
+                const trElement = document.createElement('tr'); // Tạo thẻ tr (hàng mới)
+
+                // Tạo và thêm các ô vào hàng
+                const bookIdCell = document.createElement('td');
+                bookIdCell.textContent = product._id;
+                trElement.appendChild(bookIdCell);
+
+                const titleCell = document.createElement('td');
+                titleCell.textContent = product.title;
+                trElement.appendChild(titleCell);
+
+                const imgCell = document.createElement('td');
+                imgCell.textContent = product.img;
+                trElement.appendChild(imgCell);
+
+                const authorCell = document.createElement('td');
+                authorCell.textContent = product.author;
+                trElement.appendChild(authorCell);
+
+                const publisherCell = document.createElement('td');
+                publisherCell.textContent = product.publisher;
+                trElement.appendChild(publisherCell);
+
+                const yearCell = document.createElement('td');
+                yearCell.textContent = product.publicationYear;
+                trElement.appendChild(yearCell);
+
+                const genreCell = document.createElement('td');
+                genreCell.textContent = product.genre;
+                trElement.appendChild(genreCell);
+
+                const actionCell = document.createElement('td');
+                const updateLink = document.createElement('a');
+                updateLink.href = '#';
+                updateLink.className = 'action-buttons-update';
+                updateLink.textContent = 'Sửa';
+                updateLink.style.textDecoration = 'none'; // Thêm CSS này
+                updateLink.onclick = (event) => {
+                    event.preventDefault();
+                    showUpdateForm(product._id, product);
+                };
+                actionCell.appendChild(updateLink);
+
+                const removeLink = document.createElement('a');
+                removeLink.href = '#';
+                removeLink.className = 'action-buttons-remove';
+                removeLink.textContent = 'Xóa';
+                removeLink.style.textDecoration = 'none'; // Thêm CSS này
+                removeLink.style.marginLeft = '10px'; // Thêm CSS này
+                removeLink.onclick = (event) => {
+                    event.preventDefault();
+                    confirmDelete(product._id);
+                };
+                actionCell.appendChild(removeLink);
+
+                trElement.appendChild(actionCell);
+
+                contentElement.appendChild(trElement); // Thêm hàng vào phần tử "content"
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    
+/////////Xóa sách
+        function confirmDelete(bookIdCell) {
+            const confirmed = confirm('Bạn có chắc chắn muốn xóa sách này không?');
+            if (confirmed) {
+                deleteBook(bookIdCell);
+                location.reload();
+            }
+        }
+
+        function deleteBook(bookIdCell) {
+            fetch(`http://localhost:3001/api/product/${bookIdCell}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error('Error:', error));
+        }
+
+    //////// Thêm sách
+        function addProduct() {
+            // Lấy giá trị từ form
+            const title = document.getElementsByName('title')[0].value;
+            const img = document.getElementsByName('img')[0].value;
+            const author = document.getElementsByName('author')[0].value;
+            const publisher = document.getElementsByName('publisher')[0].value;
+            const publicationYear = document.getElementsByName('publicationYear')[0].value;
+            const genre = document.getElementsByName('genre')[0].value;
+        
+            // Tạo đối tượng chứa dữ liệu đăng ký
+            const addData = {
+                title: title,
+                img: img,
+                author: author,
+                publisher: publisher,
+                publicationYear: publicationYear,
+                genre: genre
+            };
+        
+            // Gửi yêu cầu POST đến đường dẫn /api/register trên máy chủ
+            fetch('http://localhost:3001/api/product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(addData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra xem phản hồi có trường "message" không
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    // Nếu không có trường "message", xem xét rằng đăng ký đã thành công
+                    alert(data.message);
+                    console.log(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+//////////// Hiển thị form cập nhật và điền thông tin sản phẩm cần sửa
+        function showUpdateForm(bookIdCell, product) {
+            document.getElementById('container_update').style.display = 'block';
+            event.stopPropagation(); 
+            document.getElementById('updateTitle').value = product.title;
+            document.getElementById('updateImg').value = product.img;
+            document.getElementById('updateAuthor').value = product.author;
+            document.getElementById('updatePublisher').value = product.publisher;
+            document.getElementById('updatePublicationYear').value = product.publicationYear;
+            document.getElementById('updateGenre').value = product.genre;
+            document.getElementById('updateButton').setAttribute('data-book-id', bookIdCell);
+        }
+
+        document.addEventListener('click', function(event) {
+            var update = document.getElementById('container_update');
+            var target = event.target;
+            if (update.style.display === 'block' && !update.contains(target)) {
+                update.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+        
+//////////// Sửa sách
+        function updateProduct() {
+            const bookId = document.getElementById('updateButton').getAttribute('data-book-id');
+            const title = document.getElementById('updateTitle').value;
+            const img = document.getElementById('updateImg').value;
+            const author = document.getElementById('updateAuthor').value;
+            const publisher = document.getElementById('updatePublisher').value;
+            const publicationYear = document.getElementById('updatePublicationYear').value;
+            const genre = document.getElementById('updateGenre').value;
+
+            const updateData = {
+                title: title,
+                img: img,
+                author: author,
+                publisher: publisher,
+                publicationYear: publicationYear,
+                genre: genre
+            };
+
+            fetch(`http://localhost:3001/api/product/${bookId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updateData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                location.reload(); // Tải lại trang sau khi cập nhật sách thành công
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
