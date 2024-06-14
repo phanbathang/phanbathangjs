@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN : Quản lý người dùng</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/admin-users">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">ADMIN</div>
+        </div>
+        <div class="container">
+            <div class="container_navbar">
+                <a href="http://localhost:8000/api/product/admin" class="container_navbar-text">Quản lý sách</a>
+                <a href="http://localhost:8000/api/product/admin-users" class="container_navbar-text2">Quản lý Người dùng</a>
+                <a href="http://localhost:8000/api/product/admin-borrows" class="container_navbar-text">Quản lý thời gian mượn</a>
+            </div>
+            <div class="container_content">
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Mã người dùng</th>
+                            <th>Tên</th>
+                            <th>SDT</th>
+                            <th>Địa chỉ</th>
+                            <th>Email</th>
+                            <th>Mật khẩu</th>
+                            <th>Vai trò</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                        <!-- Nội dung sản phẩm sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+
+                <button class="container_content-add" onclick="showForm(event)">Thêm</button>
+                <button class="container_content-out" onclick="outAcc(event)">Đăng xuất</button>
+
+            </div>
+            <div id="container_add">
+                <div class="container_add-header">Thêm Người Dùng</div>
+                <div class="form">
+                    <form id="addBookForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="UserName">Tên</label>
+                        <input type="text" id="userName" name="userName" placeholder="Tên" required>
+                        
+                        <label for="Phone">SDT</label>
+                        <input type="text" id="phone" name="phone" placeholder="SDT" required>
+                        
+                        <label for="Address">Địa chỉ</label>
+                        <input type="text" id="address" name="address" placeholder="Địa chỉ" required>
+                        
+                        <label for="Email">Email</label>
+                        <input type="text" id="email" name="email" placeholder="Email" required>                        
+                        
+                        <label for="genre">Mật khẩu</label>
+                        <input type="text" id="password" name="password" placeholder="Mật khẩu" required>
+                        
+                        <label for="genre">Xác nhận mật khẩu</label>
+                        <input type="text" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        
+                        <label for="genre">Vai trò</label>
+                        <select style="margin: 10px 0; padding: 10px; font-size: 16px; width: 106%;" id="role" name="role" required>
+                            <option value="member">Member</option>
+                            <option value="admin">Admin</option>
+                        </select>
+
+                        <button type="button" onclick="addUser()">Thêm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function outAcc(event) {
+            if (confirm('Bạn có muốn đăng xuất không?')) {
+                window.location.href = "http://localhost:8000/api/product/login";
+            }
+        }
+        function showForm(event) {
+            document.getElementById('container_add').style.display = 'block';
+            event.stopPropagation(); // Ngăn chặn sự kiện click từ lan tỏa đến document
+        }
+    
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('container_add');
+            var target = event.target;
+            if (container.style.display === 'block' && !container.contains(target)) {
+                container.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+
+////////// Lay danh sach nguoi dung
+        fetch('http://localhost:8000/api/auth/getUser')
+        .then(response => response.json()) // Chuyển dữ liệu nhận được thành JSON
+        .then(data => {
+            const contentElement = document.getElementById('content'); // Lấy phần tử có id là "content"
+            const datas = data.datas; // Lấy danh sách sản phẩm từ dữ liệu
+
+            datas.forEach(user => { // Duyệt qua từng sản phẩm trong danh sách
+                const trElement = document.createElement('tr'); // Tạo thẻ tr (hàng mới)
+
+                // Tạo và thêm các ô vào hàng
+                const userId = document.createElement('td');
+                userId.textContent = user._id;
+                trElement.appendChild(userId);
+
+                const userName = document.createElement('td');
+                userName.textContent = user.userName;
+                trElement.appendChild(userName);
+
+                const userPhone = document.createElement('td');
+                userPhone.textContent = user.phone;
+                trElement.appendChild(userPhone);
+
+                const userAddress = document.createElement('td');
+                userAddress.textContent = user.address;
+                trElement.appendChild(userAddress);
+
+                const userEmail = document.createElement('td');
+                userEmail.textContent = user.email;
+                trElement.appendChild(userEmail);
+                
+                const userPass = document.createElement('td');
+                userPass.textContent = user.password;
+                trElement.appendChild(userPass);
+
+                const userRole = document.createElement('td');
+                userRole.textContent = user.role;
+                trElement.appendChild(userRole);
+
+                const actionCell = document.createElement('td');
+
+                const removeLink = document.createElement('a');
+                removeLink.href = '#';
+                removeLink.className = 'action-buttons-remove';
+                removeLink.textContent = 'Xóa';
+                removeLink.style.textDecoration = 'none'; 
+                removeLink.style.marginLeft = '10px';
+                removeLink.onclick = (event) => {
+                    event.preventDefault();
+                    confirmDelete(user._id);
+                };
+                actionCell.appendChild(removeLink);
+
+                trElement.appendChild(actionCell);
+
+                contentElement.appendChild(trElement); // Thêm hàng vào phần tử "content"
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+/////////// Xoa nguoi dung
+        function confirmDelete(userId) {
+            const confirmed = confirm('Bạn có chắc chắn muốn xóa người dùng này không?');
+            if (confirmed) {
+                deleteUser(userId);
+                location.reload();
+
+            }
+        }
+
+        function deleteUser(userId) {
+            fetch(`http://localhost:8000/api/auth/${userId}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error('Error:', error));
+        }
+
+////////// Them nguoi dung
+        function addUser() {
+            // Lấy giá trị từ form
+            const userName = document.getElementsByName('userName')[0].value;
+            const phone = document.getElementsByName('phone')[0].value;
+            const address = document.getElementsByName('address')[0].value;
+            const email = document.getElementsByName('email')[0].value;
+            const password = document.getElementsByName('password')[0].value;
+            const confirmPassword = document.getElementsByName('confirmPassword')[0].value;
+            const role = document.querySelector('select[name="role"]').value;
+        
+            // Kiểm tra mật khẩu đã được xác nhận chưa
+            if (password !== confirmPassword) {
+                alert("Password và Confirm Password không khớp nhau.");
+                return;
+            }
+        
+            // Tạo đối tượng chứa dữ liệu
+            const registerData = {
+                userName: userName,
+                phone: phone,
+                address: address,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword,
+                role: role
+            };
+        
+            // Gửi yêu cầu POST đến đường dẫn /api/register trên máy chủ
+            fetch('http://localhost:8000/api/auth/addUser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra xem phản hồi có trường "message" không
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    // Nếu không có trường "message", xem xét rằng đăng ký đã thành công
+                    alert(data.message);
+                    console.log(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

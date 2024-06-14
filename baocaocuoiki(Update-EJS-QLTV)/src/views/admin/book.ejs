@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN : Quản lý sách</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="/book.css">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">ADMIN</div>
+        </div>
+        <div class="container">
+            <div class="container_navbar">
+                <a href="" class="container_navbar-text1">Quản lý sách</a>
+                <a href="" class="container_navbar-text">Quản lý Người dùng</a>
+                <a href="" class="container_navbar-text">Quản lý thời gian mượn</a>
+            </div>
+            <div class="container_content">
+                <a class="add" href="/api/product/addBook">Thêm Sản Phẩm</a>
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Tiêu Đề</th>
+                            <th>Ảnh</th>
+                            <th>Tác Giả</th>
+                            <th>Nhà Xuất Bản</th>
+                            <th>Năm Xuất Bản</th>
+                            <th>Thể Loại</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% books.forEach(book => { %>
+                            <tr>
+                                <td><%= book.title %></td>
+                                <td><img src="<%= book.img %>" alt="<%= book.title %>" width="50" height="50"></td>
+                                <td><%= book.author %></td>
+                                <td><%= book.publisher %></td>
+                                <td><%= book.publicationYear %></td>
+                                <td><%= book.genre %></td>
+                                <td>
+                                    <a class="update" href="/api/product/<%= book._id %>/edit">Chỉnh Sửa</a>
+                                    <form action="/api/product/<%= book._id %>?_method=DELETE" method="post" style="display:inline;">
+                                        <button class="delete" type="submit" onclick="return confirmDelete(event)">Xóa</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmDelete(event) {
+            if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+                return true;
+            } else {
+                event.preventDefault();
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>

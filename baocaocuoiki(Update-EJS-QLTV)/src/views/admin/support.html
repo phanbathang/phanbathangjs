@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức - Sự kiện</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/support">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">
+                <a href="http://localhost:8000/api/product/index" class="header_list-home">Giới Thiệu</a>
+                <a href="http://localhost:8000/api/product/books" class="header_list-book">Sách</a>
+                <a href="http://localhost:8000/api/product/news" class="header_list-new">Tin Tức - Sự Kiện</a>
+                <a style="color: #135743; font-weight: 600;" href="http://localhost:8000/api/product/support" class="header_list-support">Hỗ Trợ</a>
+                <a href="http://localhost:8000/api/product/login" class="header_list-login">Đăng nhập</a>
+                <div class="hover">
+                    <div id="header_list-name"></div>
+                    <button id="out" onclick="accOut()">Đăng Xuất</button>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+            <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5%;" href="" class="navbar_home">Trang chủ > </a>
+            <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5px;" href="" class="navbar_new">Tin Tức - Sự Kiện</a>
+        </div>
+        <div class="container">
+            <div class="container_item">
+                <div class="container_item-header">THÔNG TIN LIÊN HỆ</div>
+                <div class="container_item-text">Đăng ký sử dụng phần mềm</div>
+                <div class="container_item-hotline">HOTLINE</div>
+                <div class="container_item-phone">19004740</div>
+                <div class="container_item-mess">(Từ 8h00 đến 17h30 từ thứ 2 đến hết sáng thứ 7)</div>
+            </div>
+            <img src="https://thuvien.edu.vn/htmlib/assets/img/Home/Vector%2012.png" class="container_img"></img>
+        </div>
+        <div class="footer">
+            <div class="footer_item">
+                <div class="footer_item-header">TRUY CẬP NHANH</div>
+                <a style="color: #fff; text-decoration: none;" href="" class="footer_item-body">Bộ phận hỗ trợ</a>
+            </div>
+            <div class="footer_item">
+                <div class="footer_item-header">DANH MỤC</div> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Giới Thiệu</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Sách</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Tin Tức - Sự Kiện</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Hỗ Trợ</a> 
+            </div>
+            <div class="footer_item">
+                <div style="padding-bottom: 20px;" class="footer_item-header">LIÊN HỆ VỚI CHÚNG TÔI</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Địa chỉ : TTTM LePARC, P. Yên Sở, Q. Hoàng Mai, Hà Nội </div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Email: cskh@quangich.com</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Website: thuvien.edu.vn</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Hotline: 1900 4740</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra xem email có tồn tại trong localStorage hay không
+        const email = localStorage.getItem('email'); 
+        if (email) {
+            // Nếu tồn tại, thực hiện yêu cầu GET để lấy thông tin người dùng từ server
+            fetch('http://localhost:8000/api/auth/getUser', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contentElement = document.getElementById('header_list-name'); // Lấy phần tử có id là "header_list-name"
+    
+                // Kiểm tra xem data có chứa thông tin người dùng hay không
+                if (data.datas) { 
+                    const user = data.datas.find(user => user.email === email); // Tìm user dựa trên email đã đăng nhập
+    
+                    // Kiểm tra xem user có tồn tại hay không
+                    if (user) {
+                        // Tạo một phần tử div để chứa thông tin người dùng
+                        const divElement = document.createElement('div');
+    
+                        // Tạo một phần tử span để hiển thị tên người dùng
+                        const userName = document.createElement('span');
+                        userName.textContent = user.userName;
+                        userName.style.fontWeight = '700';
+                        userName.style.background = 'linear-gradient(90deg, #006241 7.99%, #1B785C 100%)'; 
+                        userName.style.borderRadius = '5px';
+                        userName.style.color = '#fff';
+                        userName.style.padding = '10px';
+    
+                        // Thêm phần tử span vào phần tử div
+                        divElement.appendChild(userName);
+    
+                        // Thêm phần tử div vào phần tử hiển thị thông tin người dùng
+                        contentElement.appendChild(divElement);
+
+                    } else {
+                        console.error('User not found');
+                    }
+                } else {
+                    console.error('Error fetching user data');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+            // sử lý kiểm tra đăng nhập
+            const account = document.querySelector('.hover');
+            account.style.display = 'block';
+
+            const login = document.querySelector('.header_list-login');
+            login.style.display = 'none';
+        }
+
+         // sử lý sự kiện đăng xuất
+        const btnOut = document.getElementById('out')
+        function accOut() {
+            if(btnOut) {
+                if(confirm("Bạn có muốn đăng xuất không ?")){
+                    localStorage.removeItem('email')
+                    window.location.href = "http://localhost:8000/api/product/login";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

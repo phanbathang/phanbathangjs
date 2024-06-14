@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh Sửa Sản Phẩm</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="/editBook.css">
+</head>
+<body>
+    <div class="container_add-header">Sửa Sản Phẩm</div>
+    <form method="post" action="/api/product/<%= product._id %>?_method=PUT">
+        <label for="title">Tiêu Đề</label>
+        <input type="text" id="title" name="title" value="<%= product.title %>" required>
+        <label for="img">Ảnh</label>
+        <input type="text" id="img" name="img" value="<%= product.img %>" required>
+        <label for="author">Tác Giả</label>
+        <input type="text" id="author" name="author" value="<%= product.author %>" required>
+        <label for="publisher">Nhà Xuất Bản</label>
+        <input type="text" id="publisher" name="publisher" value="<%= product.publisher %>" required>
+        <label for="publicationYear">Năm Xuất Bản</label>
+        <input type="number" id="publicationYear" name="publicationYear" value="<%= product.publicationYear %>" required>
+        <label for="genre">Thể Loại</label>
+        <input type="text" id="genre" name="genre" value="<%= product.genre %>" required>
+        <button type="submit">Cập Nhật</button>
+    </form>
+</body>
+</html>

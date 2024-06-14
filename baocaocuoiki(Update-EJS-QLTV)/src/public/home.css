@@ -1,0 +1,151 @@
+/* index */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0px 0px 3px #333333;
+    z-index: 1;
+}
+
+.header_icon {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+}
+
+.header_list {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+
+.header_list a {
+    margin-right: 50px;
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+.header_list-login {
+    font-weight: 700;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%); 
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+}
+
+.slider_img {
+    width: 100%;
+    padding-top: 5%;
+}
+
+.content {
+    display: flex;
+    margin: 70px 0;
+}
+
+.content_text {
+    width: 45%;
+    margin-left: 4%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 70px 0;
+    background-color: #F6F6F6;
+}
+
+.container_item {
+    width: 26.7%;
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0px 0px 3px #959595;
+}
+
+.container_item-img {
+    transition: transform 1s;
+}
+
+.container_item-img:hover {
+    transform: scale(1.1);
+}
+
+.container_item-text1 {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    padding-top: 20px;
+}
+
+.system {
+    margin-top: 50px;
+}
+
+.system_body {
+    display: flex;
+    margin: 70px 0;
+}
+
+.system_body-text {
+    width: 45%;
+    margin-left: 4%;
+}
+
+.system_body-text1 {
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+    padding: 50px 0;
+    color: #fff;
+}
+
+.footer_item-header {
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.hover {
+    display: none;
+}
+
+.hover::after {
+    content: "";
+    position: absolute;
+    width: 91px;
+    height: 15px;
+    top: 68%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.hover:hover #out {
+    display: block;
+}
+
+#out {
+    background-color: #fff;
+    width: 95px;
+    height: 51px;
+    position: absolute;
+    top: 80%;
+    box-shadow: 0px 0px 3px #333333;
+    border-radius: 5px;
+    display: none;
+    border: none;
+}

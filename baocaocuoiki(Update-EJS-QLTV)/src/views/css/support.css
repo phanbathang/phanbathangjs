@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0px 0px 3px #333333;
+    z-index: 1;
+}
+
+.header_icon {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+}
+
+.header_list {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+
+.header_list a {
+    margin-right: 50px;
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+
+.header_list-login {
+    font-weight: 700;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%); 
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+}
+
+.color {
+    color: #006241;
+}
+
+.navbar {
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+    padding-bottom: 20px;
+}
+
+
+.container {
+    display: flex;
+    height: 350px;
+}
+
+.container_item {
+    text-align: center;
+    margin-left: 140px;
+    padding-top: 80px;
+
+}
+
+.container_item-header {
+    font-weight: 700;
+    font-size: 50px;
+    color: #006241;
+    padding-top: 20px;
+
+}
+
+.container_item-text {
+    font-size: 30px;
+    padding-top: 20px;
+
+}
+
+.container_item-hotline {
+    font-size: 20px;
+    font-weight: 600;
+    padding-top: 20px;
+
+
+}
+
+.container_item-phone {
+    font-size: 35px;
+    color: red;
+    font-weight: 700;
+    padding-top: 20px;
+
+}
+
+.container_item-mess {
+    font-size: 15px;
+    padding-top: 20px;
+
+}
+
+.container_img {
+    width: 800px;
+    position: absolute;
+    left: 47.3%;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+    padding: 50px 0;
+    color: #fff;
+    margin-top: 4%;
+}
+
+.footer_item-header {
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.hover {
+    display: none;
+}
+
+.hover::after {
+    content: "";
+    position: absolute;
+    width: 91px;
+    height: 15px;
+    top: 68%;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.hover:hover #out {
+    display: block;
+}
+
+#out {
+    background-color: #fff;
+    width: 95px;
+    height: 51px;
+    position: absolute;
+    top: 80%;
+    box-shadow: 0px 0px 3px #333333;
+    border-radius: 5px;
+    display: none;
+    border: none;
+}

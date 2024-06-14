@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN : Quản lý thời gian mượn trả sách</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/admin-borrows">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">ADMIN</div>
+        </div>
+        <div class="container">
+            <div class="container_navbar">
+                <a href="http://localhost:8000/api/product/admin" class="container_navbar-text">Quản lý sách</a>
+                <a href="http://localhost:8000/api/product/admin-users" class="container_navbar-text">Quản lý Người dùng</a>
+                <a href="" class="container_navbar-text1">Quản lý thời gian mượn</a>
+            </div>
+            <div class="container_content">
+                <table id="bookTable">
+                    <thead>
+                        <tr>
+                            <th>Mã Id</th>
+                            <th>Mã User</th>
+                            <th>Mã Sách</th>
+                            <th>Tiêu Đề</th>
+                            <th>Ngày Mượn</th>
+                            <th>Ngày Trả</th>
+                            <th>Trạng Thái</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="content">
+                        <!-- Nội dung mượn sách sẽ được chèn vào đây -->
+                    </tbody>
+                </table>
+
+                <button class="container_content-add" onclick="showForm(event)">Thêm</button>
+                <!-- <button class="container_content-add" onclick="updateForm(event)">Sửa</button> -->
+                <button class="container_content-out" onclick="outAcc(event)">Đăng xuất</button>
+
+            </div>
+            <!------------------------- Form thêm mượn sách -------------------------------------->
+            <div id="container_add">
+                <div class="container_add-header">Thêm mượn sách</div>
+                <div class="form">
+                    <form id="addBorrowForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="user_id">Mẫ Users</label>
+                        <input type="text" id="user_id" name="user_id" placeholder="Mã Users" required>
+
+                        <label for="product_id">Mã Sách</label>
+                        <input type="text" id="product_id" name="product_id" placeholder="Mã Sách" required>
+
+                        <label for="title">Tiêu Đề</label>
+                        <input type="text" id="title" name="title" placeholder="Tiêu Đề" required>
+
+                        <label for="borrow_date">Thời gian mượn</label>
+                        <input type="date" id="borrow_date" name="borrow_date" placeholder="Thời gian mượn" required>
+
+                        <label for="return_date">Thời gian trả</label>
+                        <input type="date" id="return_date" name="return_date" placeholder="Thời gian trả" required>
+
+                        <label for="status">Trạng thái</label>
+                        <select style="margin: 10px 0; padding: 10px; font-size: 16px; width: 106%;" id="status"
+                            name="status" required>
+                            <!-- <option value="đã trả">đã trả</option> -->
+                            <option value="Mượn">Mượn</option>
+                        </select>
+                        <button type="button" onclick="addBorrow()">Thêm</button>
+                    </form> 
+                </div>
+            </div>
+
+            <!------------------------- Form sửa mượn sách -------------------------------------->
+            <div id="container_update">
+                <div class="container_update-header">Sửa mượn sách</div>
+                <div class="form">
+                    <form id="updateBorrowForm" method="post" enctype="multipart/form-data">
+                        
+                        <label for="user_id">Mẫ Users</label>
+                        <input type="text" id="updateuser_id" name="user_id" placeholder="Mã Users" required>
+
+                        <label for="product_id">Mã Sách</label>
+                        <input type="text" id="updateproduct_id" name="product_id" placeholder="Mã Sách" required>
+                        
+                        <label for="title">Tiêu Đề</label>
+                        <input type="text" id="updatetitle" name="title" placeholder="Tiêu Đề" required>
+
+                        <label for="borrow_date">Thời gian mượn</label>
+                        <output type="date" id="updateborrow_date" name="borrow_date" placeholder="Thời gian mượn" required></output>
+
+                        <label for="return_date">Thời gian trả</label>
+                        <input type="date" id="updatereturn_date" name="return_date" placeholder="Thời gian trả" required>
+
+                        <label for="status">Trạng thái</label>
+                        <select style="margin: 10px 0; padding: 10px; font-size: 16px; width: 106%;" id="updatestatus"
+                            name="status" required>
+                            <option value="Đã trả">Đã trả</option>
+                            <!-- <option value="mượn">mượn</option> -->
+                        </select>                        
+                        <button type="button" id="updateButton" onclick="updateBorrow()">Sửa</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function outAcc(event) {
+            if (confirm('Bạn có muốn đăng xuất không?')) {
+                window.location.href = "http://localhost:8000/api/product/login";
+            }
+        }
+
+        function showForm(event) {
+            document.getElementById('container_add').style.display = 'block';
+            event.stopPropagation(); // Ngăn chặn sự kiện click từ lan tỏa đến document
+        }
+        
+    
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('container_add');
+            var target = event.target;
+            if (container.style.display === 'block' && !container.contains(target)) {
+                container.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+///////// Hiển thị thông tin mượn trả
+        fetch('http://localhost:8000/api/borrow/') 
+        .then(response => response.json())
+        .then(data => {
+            const contentElement = document.getElementById('content');
+            const datas = data.datas;
+
+            datas.forEach(borrow => { 
+                const trElement = document.createElement('tr'); 
+
+                const Id = document.createElement('td');
+                Id.textContent = borrow._id;
+                trElement.appendChild(Id);
+
+                const borrowUser_id = document.createElement('td');
+                borrowUser_id.textContent = borrow.user_id.$oid;
+
+                trElement.appendChild(borrowUser_id);
+
+                const borrowProduct_id = document.createElement('td');
+                borrowProduct_id.textContent = borrow.product_id.$oid;
+                trElement.appendChild(borrowProduct_id);
+
+                const borrowTitle = document.createElement('td');
+                borrowTitle.textContent = borrow.title;
+                trElement.appendChild(borrowTitle);
+
+                const borrowBorrow_date = document.createElement('td');
+                const borrowDate = new Date(borrow.borrow_date);
+                const formattedBorrowDate = borrowDate.toISOString().slice(0, 10);
+                borrowBorrow_date.textContent = formattedBorrowDate;
+                trElement.appendChild(borrowBorrow_date);
+
+                const borrowReturn_date = document.createElement('td');
+                const returnDate = new Date(borrow.return_date);
+                const formattedReturnDate = returnDate.toISOString().slice(0, 10);
+                borrowReturn_date.textContent = formattedReturnDate;
+                trElement.appendChild(borrowReturn_date);
+
+
+                const borrowStatus = document.createElement('td');
+                borrowStatus.textContent = borrow.status;
+                trElement.appendChild(borrowStatus);
+
+                const actionCell = document.createElement('td');
+                const updateLink = document.createElement('a');
+                updateLink.href = '#';
+                updateLink.className = 'action-buttons-update';
+                updateLink.textContent = 'Sửa';
+                updateLink.style.textDecoration = 'none'; // Thêm CSS này
+                updateLink.onclick = (event) => {
+                    event.preventDefault();
+                    showUpdateForm(borrow._id, borrow);
+                };
+                actionCell.appendChild(updateLink);
+
+                const removeLink = document.createElement('a');
+                removeLink.href = '#';
+                removeLink.className = 'action-buttons-remove';
+                removeLink.textContent = 'Xóa';
+                removeLink.style.textDecoration = 'none'; // Thêm CSS này
+                removeLink.style.marginLeft = '10px'; // Thêm CSS này
+                removeLink.onclick = (event) => {
+                    event.preventDefault();
+                    confirmDelete(borrow._id);
+                };
+                actionCell.appendChild(removeLink);
+
+                trElement.appendChild(actionCell);
+
+                contentElement.appendChild(trElement); // Thêm hàng vào phần tử "content"
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    
+/////////Xóa thông tin mượn trả
+        function confirmDelete(Id) {
+            const confirmed = confirm('Bạn có chắc chắn muốn xóa sách này không?');
+            if (confirmed) {
+                deleteBorrow(Id);
+                location.reload();
+            }
+        }
+
+        function deleteBorrow(Id) {
+            fetch(`http://localhost:8000/api/borrow/${Id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.json())
+            .then(data => data)
+            .catch(error => console.error('Error:', error));
+        }
+
+///////////// Thêm thông tin mượn trả
+        function addBorrow() {
+            // Lấy giá trị từ form
+            const user_id = document.getElementsByName('user_id')[0].value;
+            const product_id = document.getElementsByName('product_id')[0].value;
+            const title = document.getElementsByName('title')[0].value;
+            const borrow_date = document.getElementsByName('borrow_date')[0].value;
+            const return_date = document.getElementsByName('return_date')[0].value;
+            const status = document.querySelector('select[name="status"]').value;
+
+            // Chuyển đổi thành object
+            const userid = { "$oid": user_id };
+            const productid = { "$oid": product_id };
+
+            // Tạo đối tượng chứa dữ liệu đăng ký
+            const addData = {
+                user_id: userid,
+                product_id: productid,
+                title: title,
+                borrow_date: borrow_date,
+                return_date: return_date,
+                status: status,
+
+            };
+            // Gửi yêu cầu POST đến đường dẫn /api/register trên máy chủ
+            fetch('http://localhost:8000/api/borrow', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(addData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra xem phản hồi có trường "message" không
+                if (data.message) {
+                    alert(data.message);
+                    location.reload();
+                } else {
+                    // Nếu không có trường "message", xem xét rằng đăng ký đã thành công
+                    alert(data.message);
+                    console.log(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+//////////// Hiển thị form cập nhật và điền thông tin sản phẩm cần sửa
+        function showUpdateForm(Id, borrow) {
+            document.getElementById('container_update').style.display = 'block';
+            event.stopPropagation(); 
+            document.getElementById('updateuser_id').value = borrow.user_id.$oid;
+            document.getElementById('updateproduct_id').value = borrow.product_id.$oid;
+            document.getElementById('updatetitle').value = borrow.title;
+            document.getElementById('updateborrow_date').value = borrow.borrow_date.slice(0, 10);
+            document.getElementById('updatereturn_date').value = borrow.return_date;
+            document.getElementById('updatestatus').value = borrow.status;
+            document.getElementById('updateButton').setAttribute('data-book-id', Id);
+        }
+
+        document.addEventListener('click', function(event) {
+            var update = document.getElementById('container_update');
+            var target = event.target;
+            if (update.style.display === 'block' && !update.contains(target)) {
+                update.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+        
+//////////// Sửa thông tin mượn trả
+        function updateBorrow() {
+            const Id = document.getElementById('updateButton').getAttribute('data-book-id');
+            const user_id = document.getElementById('updateuser_id').value.trim();
+            const product_id = document.getElementById('updateproduct_id').value.trim();
+            const title = document.getElementById('updatetitle').value.trim();
+            const borrow_date = document.getElementById('updateborrow_date').value.trim();
+            const return_date = document.getElementById('updatereturn_date').value.trim();
+            const status = document.getElementById('updatestatus').value.trim();
+
+            if (!user_id || !product_id) {
+                alert('Mã Users và Mã Sách không được để trống');
+                return;
+            }
+
+            const userid = { "$oid": user_id };
+            const productid = { "$oid": product_id };
+
+            const updateData = {
+                user_id: userid,
+                product_id: productid,
+                title: title,
+                borrow_date: borrow_date,
+                return_date: return_date,
+                status: status,
+            };
+
+            fetch(`http://localhost:8000/api/borrow/${Id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updateData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                location.reload(); // Tải lại trang sau khi cập nhật sách thành công
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

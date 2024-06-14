@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/index">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+            <div class="header_list">
+                <a style="color: #135743; font-weight: 600;" href="" class="header_list-home">Giới Thiệu</a>
+                <a href="http://localhost:8000/api/product/books" class="header_list-book">Sách</a>
+                <a href="http://localhost:8000/api/product/news" class="header_list-new">Tin Tức - Sự Kiện</a>
+                <a href="http://localhost:8000/api/product/support" class="header_list-support">Hỗ Trợ</a>
+                <a href="http://localhost:8000/api/product/login" class="header_list-login">Đăng nhập</a>
+                <div class="hover">
+                    <div id="header_list-name"></div>
+                    <button id="out" onclick="accOut()">Đăng Xuất</button>
+                </div>
+            </div>
+        </div>
+        <div class="slider">
+            <img src="https://thuvien.edu.vn/htmlib/assets/img/Temp/background-gioithieu.svg" alt="" class="slider_img">
+        </div>
+        <div class="content">
+            <img style="margin-left: 5%;" src="https://thuvien.edu.vn/htmlib/assets/img/Home/Rectangle%201969.png" alt="" class="content_img">
+            <div class="content_text">
+                <div style="font-size: 32px; font-weight: 700; padding-bottom: 20px;" class="content_text-header">Giới thiệu sản phẩm và giải pháp thư viện điện tử, thư viện số trong các trường học</div>
+                <div style="font-size: 20px;" class="content_text-body1">VIELIB là giải pháp phần mềm Thư viện điện tử – Thư viện số được Quảng Ích xây dựng và phát triển từ năm 2003. Với tính năng ưu việt vượt trội trong quản lý tích hợp nghiệp vụ thư viện truyền thống và thư viện điện tử hiện đại, VIELIB đã được ứng dụng thành công tại hàng nghìn tổ chức, đơn vị, trường học trên toàn quốc.</div>
+                <br>
+                <div style="font-size: 20px;" class="content_text-body2">VIELIB được xây dựng trên nền tảng công nghệ điện toán đám mây, người dùng không cần phải cài đặt, chỉ cần có mạng Internet là có thể sử dụng được hệ thống ở bất cứ nơi đâu. Đây là sản phẩm được thiết kế đáp ứng đầy đủ và tốt nhất cho nhu cầu của nhà quản lý trong việc quản lý thư viện. Các chức năng của Hệ thống được thiết kế theo chuẩn thống nhất, đáp ứng đầy đủ nghiệp vụ quản lý thư viện trong các nhà trường. Đặc biệt hệ thống thư viện cung cấp đầy đủ các mẫu biểu báo cáo, phục vụ đắc lực cho ban giám hiệu nhà trường trong quá trình theo dõi và quản lý thư viện.</div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container_item">
+                <img style="width: 100%;" src="https://thuvien.edu.vn/htmlib/assets/img/GioiThieu/Rectangle%202016.png" alt="" class="container_item-img">
+                <div class="container_item-text1">Lợi ích về mặt nghiệp vụ</div>
+                <br>
+                <div style="letter-spacing: 0.7px; padding: 0 20px 20px 20px;" class="content_item-text2">Về mặt nghiệp vụ, Hệ thống quản lý thư viện trường học được xây dựng dựa trên các chuẩn chung của hệ thống thư viện thế giới và sử dụng giao diện Web nên đảm bảo khả năng tương tác, tương thích với các hệ thống khác một cách dễ dàng. Hệ thống quản lý thư viện trường học bao gồm các phân hệ OPAC, Lưu thông, Biên mục, Bổ sung, Ấn phẩm định kỳ, Bạn đọc, Thiết lập hệ thống, và đặc biệt chức năng thống kê, báo cáo hết sức mềm dẻo, thuận tiện và chính xác.</div>
+            </div>
+            <div class="container_item">
+                <img style="width: 100%;" src="https://thuvien.edu.vn/htmlib/assets/img/GioiThieu/Rectangle%202015.png" alt="" class="container_item-img">
+                <div class="container_item-text1">Lợi ích về phía nhà trường</div>
+                <br>
+                <div style="letter-spacing: 0.7px; padding: 0 20px 20px 20px;" class="content_item-text2">Về phía nhà trường, ban lãnh đạo có thể tự điều chỉnh việc bổ sung và quản lý hiệu quả nguồn tài liệu, đánh giá chính xác nhu cầu và khả năng thông tin của học sinh, phân tích số liệu và đưa ra báo cáo cần thiết về hoạt động của thư viện.</div>
+            </div>
+            <div class="container_item">
+                <img style="width: 100%;" src="https://thuvien.edu.vn/htmlib/assets/img/GioiThieu/Rectangle%202014.png" alt="" class="container_item-img">
+                <div class="container_item-text1">Lợi ích về phía thư viện, cán bộ thư viện</div>
+                <br>
+                <div style="letter-spacing: 0.7px; padding: 0 20px 20px 20px;" class="content_item-text2">Về phía thư viện, cán bộ thư viện có thể quản lý tốt các ấn phẩm, tài sản thư viện và tự động hóa các khâu xử lý nghiệp vụ từ đơn giản đến phức tạp. Bạn đọc cũng dễ dàng tiếp cận, khai thác tối đa nguồn tài nguyên của thư viện phục vụ mục đích học tập và nghiên cứu. Hệ thống quản lý thư viện trường học đã thực sự góp phần chuẩn hóa và nâng cao hiệu quả công tác quản lý thư viện, tạo điều kiện cho các trường học đáp ứng tốt nhu cầu giảng dạy và học tập hiện đại.</div>
+            </div>
+        </div>
+        <div class="system">
+            <div style="display: flex; justify-content: center; font-size: 30px; font-weight: 600;" class="system_header">Phân hệ quản lý Thư viện sách truyền thống</div>
+            <div class="system_body">
+                <img style="padding-left: 58px;" src="https://thuvien.edu.vn/htmlib/assets/img/Home/Rectangle%202402.png" alt="" class="system_body--img">
+                <div class="system_body-text">
+                    <div class="system_body-text1">1. Là hệ thống tích hợp hoàn chỉnh mọi nghiệp vụ hoạt động thư viện truyền thống đã được chuẩn hóa theo quy định của Bộ GD&ĐT, Quản lý sách, biên mục theo chuẩn thư viện Phổ thông.</div>
+                    <div class="system_body-text1">2. Đạt được hiệu quả sử dụng tối ưu nhất cho mọi quy trình nghiệp vụ thư viện, tiết kiệm tối đa nguồn lực tài chính, thời gian và công sức</div>
+                    <div class="system_body-text1">3. Khả năng tùy biến cao, cho phép cập nhật, thay đổi hoặc nâng cấp nội dung, chức năng cũng như công nghệ cho hệ thống.</div>
+                    <div class="system_body-text1">4. Số hóa đầu sách qua thiết bị mã vạch hiện đại, số hóa thẻ thư viện, quản lý phân quyền chặt chẽ.</div>
+                    <div class="system_body-text1">5. Cập nhật biên mục đầy đủ của từng cuốn sách hay tài liệu , quản lý chi tiết hóa đơn của đầu sách nhập về.</div>
+                    <div class="system_body-text1">6. Thiết lập mã vạch tự động cho sách và các tài liệu khác trong thư viện phù hợp với kho chứa sách, đồng thời in mã vạch để dán vào sách hay tài liệu.</div>
+                    <div class="system_body-text1">7. Mượn trả sách tự động qua mã vạch.</div>
+                    <div class="system_body-text1">8. Thống kê tra cứu đa dạng, báo cáo đa chức năng, đáp ứng mọi nghiệp vụ báo cáo thư viện.</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer_item">
+                <div class="footer_item-header">TRUY CẬP NHANH</div>
+                <a style="color: #fff; text-decoration: none;" href="" class="footer_item-body">Bộ phận hỗ trợ</a>
+            </div>
+            <div class="footer_item">
+                <div class="footer_item-header">DANH MỤC</div> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Giới Thiệu</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Sách</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Tin Tức - Sự Kiện</a> 
+                <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Hỗ Trợ</a> 
+            </div>
+            <div class="footer_item">
+                <div style="padding-bottom: 20px;" class="footer_item-header">LIÊN HỆ VỚI CHÚNG TÔI</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Địa chỉ : TTTM LePARC, P. Yên Sở, Q. Hoàng Mai, Hà Nội </div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Email: cskh@quangich.com</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Website: thuvien.edu.vn</div>
+                <div style="padding-bottom: 20px;" class="footer_item-body">Hotline: 1900 4740</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Kiểm tra xem email có tồn tại trong localStorage hay không
+        const email = localStorage.getItem('email'); 
+        if (email) {
+            // Nếu tồn tại, thực hiện yêu cầu GET để lấy thông tin người dùng từ server
+            fetch('http://localhost:8000/api/auth/getUser', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contentElement = document.getElementById('header_list-name'); // Lấy phần tử có id là "header_list-name"
+    
+                // Kiểm tra xem data có chứa thông tin người dùng hay không
+                if (data.datas) { 
+                    const user = data.datas.find(user => user.email === email); // Tìm user dựa trên email đã đăng nhập
+    
+                    // Kiểm tra xem user có tồn tại hay không
+                    if (user) {
+                        // Tạo một phần tử div để chứa thông tin người dùng
+                        const divElement = document.createElement('div');
+    
+                        // Tạo một phần tử span để hiển thị tên người dùng
+                        const userName = document.createElement('span');
+                        userName.textContent = user.userName;
+                        userName.style.fontWeight = '700';
+                        userName.style.background = 'linear-gradient(90deg, #006241 7.99%, #1B785C 100%)'; 
+                        userName.style.borderRadius = '5px';
+                        userName.style.color = '#fff';
+                        userName.style.padding = '10px';
+    
+                        // Thêm phần tử span vào phần tử div
+                        divElement.appendChild(userName);
+    
+                        // Thêm phần tử div vào phần tử hiển thị thông tin người dùng
+                        contentElement.appendChild(divElement);
+
+                    } else {
+                        console.error('User not found');
+                    }
+                } else {
+                    console.error('Error fetching user data');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+            // sử lý kiểm tra đăng nhập
+            const account = document.querySelector('.hover');
+            account.style.display = 'block';
+
+            const login = document.querySelector('.header_list-login');
+            login.style.display = 'none';
+        }
+
+         // sử lý sự kiện đăng xuất
+        const btnOut = document.getElementById('out')
+        function accOut() {
+            if(btnOut) {
+                if(confirm("Bạn có muốn đăng xuất không ?")){
+                    localStorage.removeItem('email')
+                    window.location.href = "http://localhost:8000/api/product/login";
+                }
+            }
+        }
+    </script>
+    
+</body>
+</html>

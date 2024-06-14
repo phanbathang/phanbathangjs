@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+    display: flex;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    background-color: #fff;
+    box-shadow: 0px 0px 3px #333333;
+    z-index: 1;
+}
+.header_icon {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+}
+.header_list {
+    display: flex;
+    align-items: center;
+    margin-left: 30%;
+}
+.header_list a {
+    margin-right: 50px;
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+}
+.header_list-login {
+    font-weight: 700;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%); 
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px;
+}
+.hover::after {
+    content: "";
+    position: absolute;
+    width: 91px;
+    height: 15px;
+    top: 68%;
+    background-color: rgba(255, 255, 255, 0);
+}
+.hover:hover #header_list-idUser{
+    display: block;
+}
+#header_list-name {
+    font-weight : 700;
+    background : linear-gradient(90deg, #006241 7.99%, #1B785C 100%); 
+    border-radius : 5px;
+    color : #fff;
+    padding : 10px;
+}
+#header_list-idUser {
+    font-weight: 700;
+    background-color: #a4a4a4;
+    border-radius: 5px;
+    color: #006241;
+    padding: 15px;
+    position: absolute;
+    top: 67px;
+    right: 45px;
+    box-shadow: 0px 0px 3px #333333;
+    border-radius: 5px;
+    display: none;
+    border: none;
+}
+.navbar {
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+    padding-bottom: 20px;
+}
+.container {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.product {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 40%;
+}
+.product img {
+    width: 180px;
+    height: 170px;
+    margin-right: 20px;
+}
+.product-info {
+    display: flex;
+    flex-direction: column;
+}
+.product-info div {
+    margin-bottom: 5px;
+}
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn {
+    background-color: #006241;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: max-content;
+}
+.footer {
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(90deg, #006241 7.99%, #1B785C 100%);
+    padding: 50px 0;
+    color: #fff;
+}
+.footer_item-header {
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+button {
+    background-color: #53a476;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 425px;
+}
+button:hover {
+    background-color: #459266;
+}

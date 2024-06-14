@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/register">
+</head>
+<body>
+    <div class="form">
+        <div style="display: flex; justify-content: center; font-weight: 700; font-size: 40px; padding-bottom: 20px;" class="header">REGISTER HERE</div>
+        <form style="display: flex; flex-direction: column; align-items: center;" onsubmit="register(event)" method="post">
+            <input type="text" name="userName" placeholder="NAME">
+            <input type="text" name="phone" placeholder="PHONE">
+            <input type="text" name="address" placeholder="ADDRESS">
+            <input type="text" name="email" placeholder="EMAIL">
+            <input type="password" name="password" placeholder="PASSWORD">
+            <input type="password" name="confirmPassword" placeholder="CONFIRM PASSWORD" required>
+            <button type="button" style="border: none; margin: 15px; padding: 10px 30px; background-color: #007784; border-radius: 5px;" onclick="register()">Đăng Kí</button>
+            <div style="margin-top: 20px;">Đăng nhập tại đây -> <a style="text-decoration: none; color: #000; border: 3px solid #007784; padding: 5px 10px; font-size: 12px;" href="http://localhost:8000/api/product/login">ĐĂNG NHẬP</a> </div>
+        </form>
+    </div>
+
+    <script>
+        function register() {
+            // Lấy giá trị từ form
+            const userName = document.getElementsByName('userName')[0].value;
+            const phone = document.getElementsByName('phone')[0].value;
+            const address = document.getElementsByName('address')[0].value;
+            const email = document.getElementsByName('email')[0].value;
+            const password = document.getElementsByName('password')[0].value;
+            const confirmPassword = document.getElementsByName('confirmPassword')[0].value;
+        
+            // Kiểm tra mật khẩu đã được xác nhận chưa
+            if (password !== confirmPassword) {
+                alert("Password và Confirm Password không khớp nhau.");
+                return;
+            }
+        
+            // Tạo đối tượng chứa dữ liệu đăng ký
+            const registerData = {
+                userName: userName,
+                phone: phone,
+                address: address,
+                email: email,
+                password: password,
+                confirmPassword: confirmPassword
+            };
+        
+            // Gửi yêu cầu POST đến đường dẫn /api/register trên máy chủ
+            fetch('http://localhost:8000/api/auth/signUp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Kiểm tra xem phản hồi có trường "message" không
+                if (data.message) {
+                    // Hiển thị thông báo từ máy chủ
+                    alert(data.message);
+                    console.log(data);
+                    window.location.href = "http://localhost:8000/api/product/login";
+                } else {
+                    // Nếu không có trường "message", xem xét rằng đăng ký đã thành công
+                    // Chuyển hướng sang trang đăng nhập
+                    alert(data.message);
+                    console.log(data);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

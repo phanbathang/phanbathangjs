@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sách</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="/userBook.css">
+</head>
+<body>
+    <div class="header">
+        <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+        <div class="header_list">
+            <a href="/api/user/home" class="header_list-home">Giới Thiệu</a>
+            <a style="color: #135743; font-weight: 600;" href="" class="header_list-book">Sách</a>
+            <a href="/api/user/news" class="header_list-new">Tin Tức - Sự Kiện</a>
+            <a href="/api/user/support" class="header_list-support">Hỗ Trợ</a>
+            <a href="" class="header_list-login">Đăng nhập</a>
+        </div>
+    </div>
+    <div class="navbar">
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5%;" href="http://localhost:8000/api/product/index" class="navbar_home">Trang chủ > </a>
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5px;" href="" class="navbar_new">Sách</a>
+    </div>
+    <div id="container" class="container">
+        <% books.forEach(function(book) { %>
+            <div class="product">
+                <img src="<%= book.img %>" alt="">
+                <div class="product-info">
+                    <div class="title"><%= book.title %></div>
+                    <div class="author">Tác giả: <%= book.author %></div>
+                    <div class="author">Nhà xuất bản: <%= book.publisher %></div>
+                    <div class="author">Năm xuất bản: <%= book.publicationYear %></div>
+                    <div class="author">Thể loại: <%= book.genre %></div>
+                    <button class="btn">Mượn ngay</button>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <div class="footer">
+        <div class="footer_item">
+            <div class="footer_item-header">TRUY CẬP NHANH</div>
+            <a style="color: #fff; text-decoration: none;" href="" class="footer_item-body">Bộ phận hỗ trợ</a>
+        </div>
+        <div class="footer_item">
+            <div class="footer_item-header">DANH MỤC</div> 
+            <a style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Giới Thiệu</a> 
+            <a style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Sách</a> 
+            <a style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Tin Tức - Sự Kiện</a> 
+            <a style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Hỗ Trợ</a> 
+        </div>
+        <div class="footer_item">
+            <div style="padding-bottom: 20px;" class="footer_item-header">LIÊN HỆ VỚI CHÚNG TÔI</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Địa chỉ : TTTM LePARC, P. Yên Sở, Q. Hoàng Mai, Hà Nội </div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Email: cskh@quangich.com</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Website: thuvien.edu.vn</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Hotline: 1900 4740</div>
+        </div>
+    </div>
+</body>
+</html>

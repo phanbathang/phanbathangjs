@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sách</title>
+    <link rel="icon" href="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg">
+    <link rel="stylesheet" href="http://localhost:8000/api/cssHandle/books">
+</head>
+<body>
+    <div class="header">
+        <a href="" class="header_icon"> <img src="https://thuvien.edu.vn/htmlib/assets/img/Overview/logo.svg" alt=""></a>
+        <div class="header_list">
+            <a href="http://localhost:8000/api/product/index" class="header_list-home">Giới Thiệu</a>
+            <a style="color: #135743; font-weight: 600;" href="http://localhost:8000/api/product/books" class="header_list-book">Sách</a>
+            <a href="http://localhost:8000/api/product/news" class="header_list-new">Tin Tức - Sự Kiện</a>
+            <a href="http://localhost:8000/api/product/support" class="header_list-support">Hỗ Trợ</a>
+            <a href="http://localhost:8000/api/product/login" class="header_list-login">Đăng nhập</a>
+            <div class="hover">
+                <div id="header_list-name"></div>
+                <div id="header_list-idUser"></div>
+            </div>
+        </div>
+    </div>
+    <div class="navbar">
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5%;" href="http://localhost:8000/api/product/index" class="navbar_home">Trang chủ > </a>
+        <a style="text-decoration: none; color: #fff; font-size: 14px; margin-left: 5px;" href="" class="navbar_new">Sách</a>
+    </div>
+    <div id="container" class="container">
+        <div id="container_form">
+            <div class="container_form-borrow">Mượn sách</div>
+            <div class="form">
+                <form id="borrowBookForm" method="post" enctype="multipart/form-data">
+                    <!-- <label for="bookId">Mã sách</label>
+                    <input type="text" id="bookId" name="bookId" placeholder="Mã sách" required> -->
+
+                    <label for="userId">Mã người dùng</label>
+                    <input type="text" id="userId" name="userId" placeholder="Mã nguời dùng" required>
+
+                    <label for="title">Tiêu đề</label>
+                    <input type="text" id="title" name="title" placeholder="Tiêu đề" required>
+
+                    <label for="borrowDate">Thời gian mượn</label>
+                    <input type="date" id="borrowDate" name="borrowDate" placeholder="Thời gian mượn" required>
+                    
+                    <label for="returnDate">Thời gian trả</label>
+                    <input type="date" id="returnDate" name="returnDate" placeholder="Thời gian trả" required>
+                    
+                    <label for="status">Trạng thái</label>
+                        <select style="margin: 10px 0; padding: 10px; font-size: 16px; width: 106%;" id="status"
+                            name="status" required>
+                            <!-- <option value="đã trả">đã trả</option> -->
+                            <option value="Mượn">Mượn</option>
+                        </select>
+                    <button type="button" id="borrowButton" onclick="submitBorrowForm()">Mượn ngay</button>
+                </form> 
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer_item">
+            <div class="footer_item-header">TRUY CẬP NHANH</div>
+            <a style="color: #fff; text-decoration: none;" href="" class="footer_item-body">Bộ phận hỗ trợ</a>
+        </div>
+        <div class="footer_item">
+            <div class="footer_item-header">DANH MỤC</div> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Giới Thiệu</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Sách</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Tin Tức - Sự Kiện</a> 
+            <a  style="color: #fff; text-decoration: none; display: block; padding-bottom: 20px;" href="" class="footer_item-body">Hỗ Trợ</a> 
+        </div>
+        <div class="footer_item">
+            <div style="padding-bottom: 20px;" class="footer_item-header">LIÊN HỆ VỚI CHÚNG TÔI</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Địa chỉ : TTTM LePARC, P. Yên Sở, Q. Hoàng Mai, Hà Nội </div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Email: cskh@quangich.com</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Website: thuvien.edu.vn</div>
+            <div style="padding-bottom: 20px;" class="footer_item-body">Hotline: 1900 4740</div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra xem email có tồn tại trong localStorage hay không
+        const email = localStorage.getItem('email'); 
+        if (email) {
+            // Nếu tồn tại, thực hiện yêu cầu GET để lấy thông tin người dùng từ server
+            fetch('http://localhost:8000/api/auth/getUser', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const contentElement = document.getElementById('header_list-name'); 
+                const contentElement2 = document.getElementById('header_list-idUser'); 
+                // Kiểm tra xem data có chứa thông tin người dùng hay không
+                if (data.datas) { 
+                    const user = data.datas.find(user => user.email === email); // Tìm user dựa trên email đã đăng nhập
+    
+                    // Kiểm tra xem user có tồn tại hay không
+                    if (user) {
+                        // Tạo một phần tử div để chứa thông tin người dùng
+                        const divElement = document.createElement('div');
+                        const divElement2 = document.createElement('div');
+    
+                        // Tạo một phần tử span để hiển thị tên người dùng
+                        const userName = document.createElement('span');
+                        userName.textContent = user.userName;
+
+                        // Tạo một phần tử span để hiển thị tên người dùng
+                        const userNameId = document.createElement('span');
+                        userNameId.textContent = user._id;
+    
+                        // Thêm phần tử span vào phần tử div
+                        divElement.appendChild(userName);
+                        divElement2.appendChild(userNameId);
+    
+                        // Thêm phần tử div vào phần tử hiển thị thông tin người dùng
+                        contentElement.appendChild(divElement);
+                        contentElement2.appendChild(divElement2);
+
+                    } else {
+                        console.error('User not found');
+                    }
+                } else {
+                    console.error('Error fetching user data');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+
+            // sử lý kiểm tra đăng nhập
+            const account = document.querySelector('.hover');
+            account.style.display = 'block';
+
+            const login = document.querySelector('.header_list-login');
+            login.style.display = 'none';
+        }
+
+///////// event đóng form
+        document.addEventListener('click', function(event) {
+            var container = document.getElementById('container_form');
+            var target = event.target;
+            if (container.style.display === 'block' && !container.contains(target)) {
+                container.style.display = 'none'; // Ẩn container_add nếu click bên ngoài
+            }
+        });
+
+//////// Hiển thị thông tin sách
+        let letNumber = 1;
+        fetch('http://localhost:8000/api/product') // Change this URL to the appropriate endpoint
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('container');
+            const products = data.datas;
+
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product');
+
+                const img = document.createElement('img');
+                img.src = product.img;
+                productDiv.appendChild(img);
+
+                const productInfo = document.createElement('div');
+                productInfo.classList.add('product-info');
+
+                const title = document.createElement('div');
+                title.textContent = product.title;
+                title.classList.add('title');
+                productInfo.appendChild(title);
+
+                const author = document.createElement('div');
+                author.textContent = 'Tác giả: ' + product.author;
+                productInfo.appendChild(author);
+
+                const publisher = document.createElement('div');
+                publisher.textContent = 'Nhà xuất bản: ' + product.publisher;
+                productInfo.appendChild(publisher);
+
+                const year = document.createElement('div');
+                year.textContent = 'Năm xuất bản: ' + product.publicationYear;
+                productInfo.appendChild(year);
+
+                const genre = document.createElement('div');
+                genre.textContent = 'Loại ấn phẩm: ' + product.genre;
+                productInfo.appendChild(genre);
+
+                const btn = document.createElement('button');
+                btn.textContent = 'Mượn sách ngay';
+                btn.classList.add('btn');
+                btn.onclick = (event) => {
+                    event.preventDefault();
+                    showBorrowForm(product._id, product);
+                }
+                productInfo.appendChild(btn);
+
+                productDiv.appendChild(productInfo);
+                container.appendChild(productDiv);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+
+///////// Hiển thị form mượn sách
+        function showBorrowForm(bookId, product) {
+            document.getElementById('container_form').style.display = 'block';
+            event.stopPropagation();
+            const borrowButton = document.getElementById('borrowButton');
+            document.getElementById('title').value = product.title;
+            borrowButton.setAttribute('data-book-id', bookId);
+        }
+
+        ///////// Mượn sách
+        function submitBorrowForm() {
+            const bookId = document.getElementById('borrowButton').getAttribute('data-book-id');
+            const userId = document.getElementById('userId').value;
+            const title = document.getElementById('title').value;
+            const borrowDate = document.getElementById('borrowDate').value;
+            const returnDate = document.getElementById('returnDate').value;
+            const status = document.getElementById('status').value;
+
+            const userIdObject = { "$oid": userId };
+            const bookIdObject = { "$oid": bookId };
+
+            const borrowData = {
+                user_id: userIdObject,
+                product_id: bookIdObject,
+                title: title,
+                borrow_date: borrowDate,
+                return_date: returnDate,
+                status: status
+            };
+
+            console.log(borrowData); // Kiểm tra dữ liệu trước khi gửi đi
+
+            fetch(`http://localhost:8000/api/borrow`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(borrowData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    alert('Mượn sách thành công');
+                    location.reload(); // Tải lại trang sau khi mượn sách thành công
+                } else {
+                    alert('Có lỗi xảy ra, vui lòng thử lại');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra, vui lòng thử lại');
+            });
+        }
+
+    </script>
+</body>
+</html>
